@@ -68,13 +68,7 @@ func (s *Scanner) handlerLoop(handler Handler, segment int) {
 
 		if s.Config.FilterExpression != "" {
 			params.FilterExpression = aws.String(s.Config.FilterExpression)
-
-			atts := map[string]*dynamodb.AttributeValue{}
-			for k, v := range s.Config.FilterAttributes {
-				atts[k] = v
-			}
-
-			params.ExpressionAttributeValues = atts
+			params.ExpressionAttributeValues = s.Config.FilterAttributes
 		}
 
 		// last evaluated key

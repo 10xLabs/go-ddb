@@ -47,7 +47,7 @@ type Config struct {
 	Limit int64
 
 	FilterExpression string
-	FilterAttributes map[string]string
+	FilterAttributes map[string]*dynamodb.AttributeValue
 }
 
 // defaults for configuration.
