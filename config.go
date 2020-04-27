@@ -45,6 +45,9 @@ type Config struct {
 
 	// Limit is the number of records to return during scan
 	Limit int64
+
+	FilterExpression string
+	FilterAttributes map[string]string
 }
 
 // defaults for configuration.

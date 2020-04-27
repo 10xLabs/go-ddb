@@ -59,10 +59,22 @@ func (s *Scanner) handlerLoop(handler Handler, segment int) {
 	for {
 		// scan params
 		params := &dynamodb.ScanInput{
-			TableName:     aws.String(s.TableName),
-			Segment:       aws.Int64(int64(segment)),
-			TotalSegments: aws.Int64(int64(s.TotalSegments)),
-			Limit:         aws.Int64(s.Config.Limit),
+			TableName:      aws.String(s.TableName),
+			Segment:        aws.Int64(int64(segment)),
+			TotalSegments:  aws.Int64(int64(s.TotalSegments)),
+			Limit:          aws.Int64(s.Config.Limit),
+			ConsistentRead: aws.Bool(true),
+		}
+
+		if s.Config.FilterExpression != "" {
+			params.FilterExpression = aws.String(s.Config.FilterExpression)
+
+			atts := map[string]*dynamodb.AttributeValue{}
+			for k, v := range s.Config.FilterAttributes {
+				atts[k] = v
+			}
+
+			params.ExpressionAttributeValues = atts
 		}
 
 		// last evaluated key
