@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
 )
 
 const (
@@ -17,6 +18,9 @@ const (
 type Config struct {
 	// Svc the dynamodb connection
 	Svc *dynamodb.DynamoDB
+
+	// Dynamodb client
+	Client dynamodbiface.DynamoDBAPI
 
 	// AwsRegion is the region the database is in. Defaults to us-west-1
 	AwsRegion string

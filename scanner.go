@@ -77,7 +77,7 @@ func (s *Scanner) handlerLoop(handler Handler, segment int) {
 		}
 
 		// scan, sleep if rate limited
-		resp, err := s.Svc.Scan(params)
+		resp, err := s.Client.Scan(params)
 		if err != nil {
 			fmt.Println(err)
 			time.Sleep(bk.Duration())
